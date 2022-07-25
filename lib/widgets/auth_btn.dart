@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+
+class AuthBtn extends StatefulWidget {
+  const AuthBtn({Key? key, required this.onTap}) : super(key: key);
+  final Future Function() onTap;
+
+  @override
+  State<AuthBtn> createState() => _AuthBtnState();
+}
+
+class _AuthBtnState extends State<AuthBtn> {
+  bool isLoading = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: TextButton(
+          onPressed: isLoading
+              ? () {}
+              : () async {
+                  setState(() {
+                    isLoading = true;
+                  });
+                  await widget.onTap();
+                  setState(() {
+                    isLoading = false;
+                  });
+                },
+          style: TextButton.styleFrom(
+            backgroundColor: Theme.of(context).primaryColor,
+          ),
+          child: 
+          isLoading?
+          const CircularProgressIndicator(
+            color: Colors.white,
+          )
+          :
+          const Text(
+            'Sign In',
+            style: TextStyle(color: Colors.white),
+          )),
+    );
+  }
+}
