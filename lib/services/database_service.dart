@@ -8,8 +8,10 @@ class DatabaseService {
     _firebaseDatabase = FirebaseDatabase.instance;
   }
 
-  Future getReadings() async {
-    var data = await _firebaseDatabase.ref('readings').get();
-    print(data.children);
+  Stream<DatabaseEvent> getReadings() async* {
+    var ref = _firebaseDatabase.ref('readings');
+    // print(data.children.first.value);
+    // return data.children;
+    yield* ref.onValue;
   }
 }

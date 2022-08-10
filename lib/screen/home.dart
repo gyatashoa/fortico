@@ -1,9 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fortico/config/routes.dart';
 import 'package:fortico/config/service_registration.dart';
 import 'package:fortico/services/auth_service.dart';
+import 'package:fortico/services/database_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   Future onLogout() async {
     await getIt<AuthService>().logout();
-    Navigator.pushReplacementNamed(context,signInRoute);
+    Navigator.pushReplacementNamed(context, signInRoute);
   }
 
   @override
@@ -39,6 +41,29 @@ class _HomeScreenState extends State<HomeScreen> {
               ))
         ],
       ),
+      body: StreamBuilder<DatabaseEvent>(
+          stream: getIt<DatabaseService>().getReadings(),
+          builder: (_, data) {
+            if (data.hasError) {
+              return Text('Error');
+            }
+            if (data.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            }
+            if (data.hasData) {
+              var docs = data.data!.snapshot.children;
+              return Column(
+                children: docs
+                    .map((value) => ListTile(
+                          title: Text(value.value.toString()),
+                          subtitle: Text(value.key.toString()),
+                        ))
+                    .toList(),
+              );
+              // return Text(data.data);
+            }
+            return Container();
+          }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, addSensor);
