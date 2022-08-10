@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "109600866237",
+    "firebase_url": "https://water-level-monitor-98f48-default-rtdb.firebaseio.com",
+    "project_id": "water-level-monitor-98f48",
+    "storage_bucket": "water-level-monitor-98f48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109600866237:android:c67c6b4a49cc31bed91cd4",
+        "android_client_info": {
+          "package_name": "com.example.fortico"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "109600866237-sj7ci1ub5euij60vh1tp43kaf94r56m5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSe1IedfPUfEX48jHKjI9izi0kEgHtHvc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "109600866237-sj7ci1ub5euij60vh1tp43kaf94r56m5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

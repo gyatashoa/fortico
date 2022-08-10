@@ -1,10 +1,24 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:fortico/config/routes.dart';
+import 'package:fortico/config/service_registration.dart';
+import 'package:fortico/services/auth_service.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   static String get home => '/home';
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  Future onLogout() async {
+    await getIt<AuthService>().logout();
+    Navigator.pushReplacementNamed(context,signInRoute);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +28,7 @@ class HomeScreen extends StatelessWidget {
         actions: [
           TextButton.icon(
               style: TextButton.styleFrom(),
-              onPressed: () {},
+              onPressed: onLogout,
               icon: const Icon(
                 Icons.person,
                 color: Colors.white,
@@ -27,7 +41,7 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context,addSensor);
+          Navigator.pushNamed(context, addSensor);
         },
         child: Icon(Icons.add),
       ),
