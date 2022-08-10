@@ -6,6 +6,8 @@ import 'package:fortico/config/routes.dart';
 import 'package:fortico/config/service_registration.dart';
 import 'package:fortico/services/auth_service.dart';
 import 'package:fortico/services/database_service.dart';
+import 'package:fortico/utils/utils.dart';
+import 'package:fortico/widgets/tank_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -52,6 +54,23 @@ class _HomeScreenState extends State<HomeScreen> {
             }
             if (data.hasData) {
               var docs = data.data!.snapshot.children;
+              var doc = docs.first;
+              double level = (double.parse((doc.value as Map)['level']) / 200)*100;
+              return Align(
+                alignment: Alignment.center,
+                child: TankWidget(
+                  level: level,
+                ));
+              return Center(
+                child: CircularProgressIndicator(
+                  value: level,
+                  strokeWidth: 6,
+                  color: Utils.getLevelColor(level),
+                ),
+              );
+              return Container(
+                child: Text('Current Water Level ${level}'),
+              );
               return Column(
                 children: docs
                     .map((value) => ListTile(
