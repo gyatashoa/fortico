@@ -55,39 +55,23 @@ class _HomeScreenState extends State<HomeScreen> {
             if (data.hasData) {
               var docs = data.data!.snapshot.children;
               var doc = docs.first;
-              double level = (double.parse((doc.value as Map)['level']) / 200)*100;
+              double level =
+                  (double.parse((doc.value as Map)['level']) / 200) * 100;
               return Align(
-                alignment: Alignment.center,
-                child: TankWidget(
-                  level: level,
-                ));
-              return Center(
-                child: CircularProgressIndicator(
-                  value: level,
-                  strokeWidth: 6,
-                  color: Utils.getLevelColor(level),
-                ),
-              );
-              return Container(
-                child: Text('Current Water Level ${level}'),
-              );
-              return Column(
-                children: docs
-                    .map((value) => ListTile(
-                          title: Text(value.value.toString()),
-                          subtitle: Text(value.key.toString()),
-                        ))
-                    .toList(),
-              );
+                  alignment: Alignment.center,
+                  child: TankWidget(
+                    level: level,
+                  ));
+
               // return Text(data.data);
             }
             return Container();
           }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, addSensor);
+          Navigator.pushNamed(context, history);
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.history),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_time_ago/get_time_ago.dart';
 
 class Utils {
   static double getHeight(BuildContext context) {
@@ -19,5 +20,14 @@ class Utils {
     }
 
     return Colors.red;
+  }
+
+  static String formatTime(DateTime date) {
+    return GetTimeAgo.parse(date);
+  }
+
+  static String getPercentage(String val) {
+    var percentage = (double.parse(val) / 200) * 100;
+    return '${percentage.toInt()}%';
   }
 }
