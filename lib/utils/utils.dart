@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fortico/config/constants.dart';
 import 'package:get_time_ago/get_time_ago.dart';
-import 'package:ntp/ntp.dart';
 
 class Utils {
   static double getHeight(BuildContext context) {
