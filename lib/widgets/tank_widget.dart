@@ -137,10 +137,13 @@ class _TankWidgetState extends State<TankWidget> with TickerProviderStateMixin {
                     color: Utils.getLevelColor(widget.level)),
                 child: Container(
                   decoration: BoxDecoration(
-                    // color: Colors.red
-      
-                  ),
-                  height: (Utils.getHeight(context) * 0.8)*(widget.level/100),
+                      // color: Colors.red
+
+                      ),
+                  height: (widget.level.isNegative
+                          ? 0
+                          : Utils.getHeight(context) * 0.8) *
+                      (widget.level / 100),
                   width: Utils.getWidth(context) * 0.7,
                 ),
               ),

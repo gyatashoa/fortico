@@ -24,20 +24,14 @@ class History extends StatelessWidget {
             }
             if (data.hasData) {
               var docs = data.data!.snapshot.children.toList();
-              // print(docs.last.key);
-              //TODO: get Time
-              // print(DateTime.fromMicrosecondsSinceEpoch(
-              //         int.parse(
-              //           docs.first.key!,
-              //         ),
-              //         isUtc: true)
-              //     .minute);
+              docs = docs.reversed.toList();
               return ListView.builder(
                 itemBuilder: ((context, index) => ListTile(
                       title: Text(Utils.getPercentage(
                           (docs[index].value as Map)['level'])),
                       leading: const Icon(Icons.water_drop),
-                      subtitle: Text(Utils.formatTime(DateTime.now())),
+                      subtitle:
+                          Text(Utils.convertTime(int.parse(docs[index].key!))),
                     )),
                 itemCount: docs.length,
               );

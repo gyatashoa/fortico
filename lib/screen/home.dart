@@ -2,6 +2,7 @@
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:fortico/config/constants.dart';
 import 'package:fortico/config/routes.dart';
 import 'package:fortico/config/service_registration.dart';
 import 'package:fortico/services/auth_service.dart';
@@ -54,14 +55,39 @@ class _HomeScreenState extends State<HomeScreen> {
             }
             if (data.hasData) {
               var docs = data.data!.snapshot.children;
-              var doc = docs.first;
+              var doc = docs.last;
+              print(doc.value);
               double level =
-                  (double.parse((doc.value as Map)['level']) / 200) * 100;
-              return Align(
-                  alignment: Alignment.center,
-                  child: TankWidget(
-                    level: level,
-                  ));
+                  (double.parse((doc.value as Map)['level']) / BARREL_SIZE) *
+                      100;
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                        text: 'Last Time checked: ',
+                        style: const TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                        children: [
+                          TextSpan(
+                              text: Utils.convertTime(
+                                int.parse(doc.key!),
+                              ),
+                              style: const TextStyle(
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.w500))
+                        ]),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Align(
+                      alignment: Alignment.center,
+                      child: TankWidget(
+                        level: level,
+                      )),
+                ],
+              );
 
               // return Text(data.data);
             }

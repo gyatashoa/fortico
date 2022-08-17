@@ -59,62 +59,61 @@ class _SignInState extends State<SignIn> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30.0),
         child: SizedBox(
-          height: Utils.getHeight(context),
+          // height: double.infinity,
           child: SingleChildScrollView(
-            child: SizedBox(
-              height: Utils.getHeight(context),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Expanded(child: SizedBox.expand()),
-                  SizedBox(
-                    height: Utils.getHeight(context) * .1,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Expanded(child: SizedBox.expand()),
+                SizedBox(
+                  height: Utils.getHeight(context) * .08,
+                ),
+                const Text(
+                  'FORTICO',
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+                LottieBuilder.asset(
+                  'assets/animations/dripping-water-faucet.json',
+                  height: Utils.getHeight(context) * .35,
+                ),
+                // SvgPicture.asset('assets/images/create_account.svg',
+                // height: Utils.getHeight(context) * .3,
+                // width: double.infinity
+                // ,),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    'Please Enter your email and password to login in your account',
+                    style: TextStyle(color: Colors.black45),
                   ),
-                  const Text(
-                    'FORTICO',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+                TextField(
+                  controller: emailController,
+                  decoration: const InputDecoration(hintText: 'Email'),
+                ),
+                TextField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(hintText: 'Password'),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                AuthBtn(
+                  text: 'Sign In',
+                  onTap: onSignIn,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(signUpRoute);
+                  },
+                  child: const Text(
+                    'sign up',
+                    style: TextStyle(color: Colors.blue),
                   ),
-                  LottieBuilder.asset(
-                      'assets/animations/dripping-water-faucet.json'),
-                  // SvgPicture.asset('assets/images/create_account.svg',
-                  // height: Utils.getHeight(context) * .3,
-                  // width: double.infinity
-                  // ,),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(
-                      'Please Enter your email and password to login in your account',
-                      style: TextStyle(color: Colors.black45),
-                    ),
-                  ),
-                  TextField(
-                    controller: emailController,
-                    decoration: const InputDecoration(hintText: 'Email'),
-                  ),
-                  TextField(
-                    controller: passwordController,
-                    obscureText: true,
-                    decoration: const InputDecoration(hintText: 'Password'),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  AuthBtn(
-                    text: 'Sign In',
-                    onTap: onSignIn,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).pushNamed(signUpRoute);
-                    },
-                    child: const Text(
-                      'sign up',
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  )
-                  // Expanded(child: SizedBox.expand()),
-                ],
-              ),
+                )
+                // Expanded(child: SizedBox.expand()),
+              ],
             ),
           ),
         ),
