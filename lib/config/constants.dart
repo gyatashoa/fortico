@@ -1,1 +1,1 @@
-const BARREL_SIZE = 12;
+const BARREL_SIZE = 15;
